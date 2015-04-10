@@ -1,0 +1,26 @@
+import java.util.*;
+public class kaos {
+public static void main(String [] NURRAHMAN )
+{ Scanner sc=new Scanner (System.in);
+ 
+int jumlah_kaos=0;
+int harga_kaos=50000;
+int total_harga=0;
+int bonus=0;
+int total_bonus=0;
+int kaos_dibeli=0;
+
+System.out.print ("masukkan jumlah kaos");
+jumlah_kaos=Integer.parseInt(sc.nextLine());
+
+total_bonus=jumlah_kaos/3;
+kaos_dibeli=jumlah_kaos-total_bonus;
+total_harga=harga_kaos*kaos_dibeli;
+
+System.out.println ("Jumlah kaos yang dibeli " +jumlah_kaos);
+System.out.println ("kaos yang dibayar " +kaos_dibeli);
+System.out.println ("total harga yang dibayar " +total_harga);
+System.out.println ("total bonus yang didapat " +total_bonus);
+
+}
+}
