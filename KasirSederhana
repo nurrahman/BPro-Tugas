@@ -1,0 +1,60 @@
+import java.util.*;
+public class KasirSederhana
+{
+ public static void main(String[]args)
+ {
+  Scanner br=new Scanner(System.in);
+  int menu=0;  
+  int pilihan;  
+  int jumporsi;  
+  int subtotal=0;
+  int harga;
+  int keluar=0;
+  int total=0;
+    
+  do{
+  
+   System.out.println("------- Menu Makanan -------  List Harga|");
+   System.out.println("1. Pecel \t \t \t Rp.8000 |");
+   System.out.println("2. Soto \t \t \t Rp.10000|");
+   System.out.println("3. Mie Pangsit Ayam Bakso\t Rp.9000 |");
+   System.out.println("4. Es Teh\t \t \t Rp.2000 |"); 
+   System.out.println("5. Es Jeruk\t \t Rp.3500 |");
+    System.out.println("-----------------------------------------");
+   System.out.print("SILAHKAN PILIH MENU YANG ANDA INGINKAN[1-5] : ");
+   pilihan=br.nextInt();  
+    
+   switch(pilihan) {
+    case 1: menu=8000;
+    break;
+    case 2: menu=10000;
+    break;
+    case 3: menu=9000;
+    break;
+    case 4: menu=2000;
+    break;
+    case 5: menu=3500;
+    break;
+    default:
+      subtotal=0;
+      System.out.println("Maaf menu yang anda pilih tidak tersedia.. ");
+   }
+        
+   if (pilihan<=5){
+    System.out.print("Masukkan jumlah porsi : ");
+    jumporsi=br.nextInt(); 
+    subtotal= menu * jumporsi;
+    System.out.println("Subtotal : "+subtotal);
+ 
+    }      
+    System.out.print("Beli lagi?[ 1=ya 0=tidak ] : ");
+    keluar=br.nextInt();
+    total=total+subtotal;
+   
+  }
+  while(keluar==1);{
+   
+   System.out.print("TOTAL Transaksi : Rp." + total);
+  }
+ }
+}
