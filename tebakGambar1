@@ -1,0 +1,39 @@
+import java.util.*;
+public class tebakGambar1 {
+  public static void main (String [] argc){
+  Scanner masukkan=new Scanner (System.in);
+  
+  
+  System.out.print("Pilih Gambar(1)/Angka(0):");   
+  int masukkanAngkaAtauGambar=masukkan.nextInt();
+  int bilRandom=(int)(Math.random()+0.5);
+  
+ //pilihan user 
+  if (masukkanAngkaAtauGambar==1){
+    System.out.println("|Anda Memilih Gambar      |");
+  }
+  else{
+    System.out.println("|Anda Memilih Angka       |");
+  }
+                         
+  //pilihan komputer
+  if (bilRandom==1){
+    System.out.println("|Komputer Memilih Gambar  |");
+  }
+  else{
+    System.out.println("|komputer Memilih Angka   |");
+  }
+       
+  if (bilRandom==masukkanAngkaAtauGambar){
+    
+    System.out.println("Anda menang");
+    
+  }
+  else{
+    
+    System.out.println("Anda kalah");
+ 
+  
+  }
+  }
+}
