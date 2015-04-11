@@ -1,0 +1,58 @@
+  import java.util.*;
+  public class dataPenjualan{
+    public static void main (String []args){
+     Scanner sc=new Scanner(System.in);  
+     //array 2 dimensi
+     
+     //proses deklarasi array
+     int [][]arr= {{3,6,2,7,2},
+                   {1,5,6,6,4},
+                   {12,8,2,2,1},
+                   {3,1,9,2,4}};
+     String[]judul={"Pensil","Penghapus","Bulpen","Penggaris"};
+     String[]hari={"Senin","Selasa","Rabu","Kamis","Jumat","Pendapatan Barang"};
+     int[]pendapatan=new int[5];
+     int[]omset={0,0,0,0,0};
+
+     
+          //hitung
+       for(int j=0;j<=arr.length/* atau 3*/;){
+         pendapatan[0]=pendapatan[0]+arr[0][j];
+         pendapatan[1]=pendapatan[1]+arr[1][j];
+         pendapatan[2]=pendapatan[2]+arr[2][j];
+         pendapatan[3]=pendapatan[3]+arr[3][j];
+         j++;
+       }
+       for(int i=0;i<arr.length;i++){
+       omset[0]=omset [0]+arr[i][0];
+       omset[1]=omset [1]+arr[i][1];
+       omset[2]=omset [2]+arr[i][2];
+       omset[3]=omset [3]+arr[i][3];
+       omset[4]=omset [4]+arr[i][4];
+       }
+       
+        //print  
+     System.out.print("Barang/Hari ");
+     for (int i=0;i<hari.length;i++){
+       System.out.print(hari[i]+" \t");
+     }
+     System.out.println();
+     for (int i=0;i<arr.length;i++){
+       for(int j=0;j<=arr.length;j++){
+             if (arr[i][j]==arr[i][0]){
+           System.out.print(judul[i]+"\t    "+arr[i][j]+"\t");}
+         else{
+           System.out.print(arr[i][j]+"\t");}
+       }
+       System.out.print(pendapatan[i]);
+       System.out.println(" ");
+     }
+     System.out.print("Penj./hari    ");
+     for(int i=0;i<omset.length;i++){
+     System.out.print(omset[i]+"\t");
+     }
+     System.out.println();
+      
+      
+    }
+  }
