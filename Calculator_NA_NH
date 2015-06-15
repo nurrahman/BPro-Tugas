@@ -1,0 +1,82 @@
+import java.io.*;
+public class calculate_hasil_na_nh
+{
+  public static void main (String[]nur)throws Exception
+  {
+  BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+  try{ 
+  int na,ulang;
+  String lagi;
+  
+  do
+  {
+  System.out.println("Masukkkan Nama : ");
+  String nama=br.readLine();
+  System.out.println("Masukkan Mata Kuliah : ");
+  String mataKuliah=br.readLine();
+  System.out.println("Masukkan Nilai Tugas : ");
+  int tugas=Integer.parseInt(br.readLine());
+  System.out.println("Masukkan Nilai UTS : ");
+  int uts=Integer.parseInt(br.readLine());
+  System.out.println("Masukkan Nilai UAS : ");
+  int uas=Integer.parseInt(br.readLine());
+  
+  na=tugas*40/100+uts*30/100+uas*30/100;
+  
+  System.out.println("============ HASIL ANDA ============");
+  System.out.println("Nama \t\t: " +nama);
+  System.out.println("Nama Mata Kuliah \t: " +mataKuliah);
+  System.out.println("Nilai Akhir \t: " +na);
+  
+  if(na>=80)
+  {
+    System.out.println("Nilai Huruf \t: A");
+  }
+  else if(na>=75)
+  {
+    System.out.println("Nilai Huruf \t: B+");
+  }
+  else if(na>=65)
+  {
+    System.out.println("Nilai Huruf \t: B");
+  }
+  else if(na>=60)
+  {
+    System.out.println("Nilai Huruf \t: C+");
+  }
+  else if(na>=55)
+  {
+    System.out.println("Nilai Huruf \t: C");
+  }
+  else if(na>=44)
+  {
+    System.out.println("Nilai Huruf \t: D");
+  }
+  else
+  {
+    System.out.println("Nilai Huruf \t: E");
+  }
+  
+  if(na<=65)
+  {
+  System.out.println("Maaf Anda Tidak Lulus");
+  }
+  else
+  {
+  System.out.println("Selamat Anda Lulus, GoodJob :)");
+  }
+  
+  System.out.print("====================================");
+  System.out.println();
+  System.out.println("Input lagi? (0=no) (1=yes)");
+  lagi=br.readLine();
+  }
+  while(lagi.equalsIgnoreCase("y"));
+  }
+  catch(Exception e)
+  {
+  System.out.println("Inputan Anda Salah, harus berupa ANGKA !!!");
+  }
+  
+  }
+}
