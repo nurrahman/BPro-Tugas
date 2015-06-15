@@ -1,0 +1,91 @@
+import java.util.Scanner;
+ 
+public class penjualan_susu
+{
+    public static void main(String[]nur)
+    {
+        // membuat objek dulu ah
+        Scanner input = new Scanner(System.in);
+ 
+        // membuat Variablenya
+        String kode_susu,merk_susu;
+        double harga,ukuran_kaleng,jumlah,total_bayar;
+ 
+        System.out.println();
+        System.out.println("TOKO KELONTONG KERONCONGAN");
+        System.out.println("--------------------------");
+ 
+        System.out.println();
+        System.out.println("A. SUSU DANCOW");
+        System.out.println("   1. Ukuran Kecil");
+        System.out.println("   2. Ukuran Sedang");
+        System.out.println("   3. Ukuran Besar");
+        System.out.println("B. SUSU BENDERA");
+        System.out.println("   1. Ukuran Kecil");
+        System.out.println("   2. Ukuran Sedang");
+        System.out.println("   3. Ukuran Besar");
+        System.out.println("C. SUSU SGM");
+        System.out.println("   1. Ukuran Kecil");
+        System.out.println("   2. Ukuran Sedang");
+        System.out.println("   3. Ukuran Besar");
+ 
+        System.out.println();
+        System.out.print("Masukkan Merek Susu ( DANCOW | BENDERA | SGM ) : ");
+        kode_susu=input.nextLine();
+ 
+        if (kode_susu.equals("A"))
+            merk_susu=("DANCOW");
+ 
+        else if (kode_susu.equals("B"))
+            merk_susu=("BENDERA");
+        else
+            merk_susu=("SGM");
+ 
+        System.out.println("Merk Susu Yang Dibeli Adalah. " +merk_susu);
+        System.out.println();
+ 
+        System.out.print("Masukkan Ukuran Kaleng ( KECIL | SEDANG | BESAR ) : ");
+        ukuran_kaleng=input.nextDouble();
+ 
+        if (merk_susu.equals("DANCOW"))
+        {
+                if(ukuran_kaleng<=1)
+                    harga=25000;
+                else if(ukuran_kaleng<=2)
+                    harga=22000;
+                else
+                    harga=18500;
+        }
+        else if (merk_susu.equals("BENDERA"))
+        {
+                if(ukuran_kaleng<=1)
+                    harga=22000;
+                else if(ukuran_kaleng<=2)
+                    harga=20000;
+                else
+                    harga=16000;
+        }
+        else
+        {
+                if(ukuran_kaleng<=1)
+                    harga=20000;
+                else if(ukuran_kaleng<=2)
+                    harga=18000;
+                else
+                    harga=15000;
+        }
+ 
+        System.out.println("Ukuran yang dipilih adalah : " +ukuran_kaleng);
+        System.out.println("Harga Satuan Barang Rp. " +harga);
+        System.out.println("--------------------------");
+ 
+        System.out.print("Jumlah Yang Dibeli : ");
+        jumlah=input.nextDouble();
+ 
+        total_bayar=jumlah*harga;
+        System.out.println("--------------------------");
+ 
+        System.out.print("Harga Yang harus dibayarkan adalah Rp. " +total_bayar);
+    }
+ 
+}
