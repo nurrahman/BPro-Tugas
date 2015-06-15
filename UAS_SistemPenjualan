@@ -1,0 +1,493 @@
+import java.util.Date;  
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class UASproject{
+  public static Vector<Vector> vekSepatu= new Vector<Vector>();
+  public static Vector<Vector> vekHarga= new Vector<Vector>();
+  public static Vector<Vector> vekCustomer= new Vector<Vector>();
+  public static Vector<Vector> vekIdtag= new Vector<Vector>();
+  public static int omset=0;
+  
+  
+  public static String sepatu [][]=
+  {{"V01","Vans New Era"},
+    {"V02","Vans Old School"},
+    {"V03","Vans Autenthic"},
+    {"V04","Vans Premium"},
+    {"V05","Vans Old Sc"},
+    {"V06","Vans Of The Top"},
+    {"V07","Vans Arm Authentic"},
+    {"V08","Vans Pot Marr"},
+    {"V09","Vans Air Zoom"},
+    {"V10","Vans Free Cross"},
+    {"V11","Vans Free TR5"},
+    {"V12","Vans Mercurial"},
+    {"V13","Vans Tiempo"},
+    {"V14","Vans Hyper Venom"},
+    {"V15","Vans All Star R"},
+    {"V16","Vans All Star S"},
+    {"V17","Vans Rude Ude"},
+    {"V18","Vans Portazoit"},
+    {"V19","Vans Original"},
+    {"V20","Vans Boom"}};
+  
+  public static int harga[][] =
+  { {800,50},
+    {1200,50},
+    {750,50},
+    {670,50},
+    {1500,50},
+    {1350,50},
+    {500,50},
+    {100,50},
+    {1500,50},
+    {1705,50},
+    {1250,50},
+    {300,50},
+    {899,50},
+    {500,50},
+    {650,50},
+    {1800,50},
+    {1308,50},
+    {577,50},
+    {250,50},
+    {1670,50} };
+  
+//Meng-inputkan User  
+  public static String user [][] = {{"admin","admin"},{"nur","nur"},{"sys","sys"}};
+
+// random ID;  
+  public static int id(){
+  double idRandom;
+  int hasil=0; 
+  idRandom = Math.random()*9999; 
+  hasil=(int)idRandom;
+  return hasil;
+  }
+  
+//Method untuk menentukan tanggal
+  public static String getTanggal() {  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");  
+        Date date = new Date();  
+        return dateFormat.format(date);  
+    }  
+  
+//
+  public static Vector<String> addSepatu(String kode,String nama){
+   Vector<String> vec=new Vector<String>();
+   vec.addElement(kode);
+   vec.addElement(nama);
+   return vec;
+  }
+  
+  public static Vector<Integer> addHarga(int harga,int jumlah,int jbarang){
+   Vector<Integer> vec=new Vector<Integer>();
+   vec.addElement(harga);
+   vec.addElement(jumlah);
+   vec.addElement(jbarang);
+   return vec;
+  }
+  
+  public static Vector<Integer> addCustomer(int semuaTotal){
+   Vector<Integer> vec=new Vector<Integer>();
+   vec.addElement(semuaTotal);
+   return vec;
+   }
+  
+   public static Vector<String> addIdtag(String tanggal, String idc){
+   Vector<String> vec=new Vector<String>();
+   vec.addElement(tanggal);
+   vec.addElement(idc);
+   return vec;
+   }
+  
+    public static int omsetJual(int jumlah){
+    omset+=jumlah;
+    return omset;
+  }
+   
+//Method mencari kode
+  public static int cariKodeS (String[][]sepatu,String cari){
+    int i=0;
+    int indeks = -1;
+    do{
+      if(sepatu[i][0].equalsIgnoreCase(cari)){
+        indeks = i;
+      } 
+      i++;
+    }while((i<sepatu.length)&&(indeks == -1));
+    return indeks; 
+  }
+  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  public static void main (String[]nur)throws IOException{
+  BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+  
+  UASproject tgl = new UASproject();//harus sama dengan classnya UASproject
+  int i=1;//untuk Login Ke
+  boolean masuk=false;//untuk masuk ke username
+  boolean lagii=false; //transaksi penjualan
+  int pilih,pilih2; //pilihan
+  String username,password,cari,pil,kode,nama;
+  int jumlah=0,hasil=0,total=0,semuaTotal=0,terjual=0,xx=0;
+  int idx=-1;
+  int t=0;
+  int jterjual=0;
+  
+  do{
+  System.out.println("      Sepatu VANS STORE    ");
+  System.out.println("           ORIGINAL        ");
+  System.out.println("---------------------------");
+  System.out.println("        Login ke-" +i);
+  System.out.println("---------------------------");
+  System.out.println("Username : ");
+  username=br.readLine();
+  System.out.println("Password : ");
+  password=br.readLine();
+  
+  for(int j=0;j<user.length;j++){
+  if(username.equals(user[j][0]) && password.equals(user[j][1])){
+    i=4;
+    masuk = true;  
+  }
+  }
+  i++;
+  System.out.println();
+  }while(i<=3);
+  
+  if(masuk==true){
+    do{
+   System.out.println("          | SELAMAT DATANG |        ");
+   System.out.println("====================================");   
+   System.out.println("===========  VANS STORE  ===========");
+   System.out.println("=  HOME  =\t\tID : "+username +"\t    =");
+   System.out.println("===================================="); 
+    System.out.println("= [1] Transaksi Penjualan          =");
+    System.out.println("= [2] Maintenance Data Barang      =");
+    System.out.println("= [3] Menampilkan Data Penjualan   =");
+    System.out.println("= [4] Menampilkan Data Barang      =");
+    System.out.println("= [5] Mencari Data Barang          =");
+    System.out.println("= [6] Omset Yang Didapat           =");
+    System.out.println("= [7] Exit                         =");
+    System.out.println("============ @NurRahman ===========");
+    
+    System.out.print("Pilih : ");
+    pilih=Integer.parseInt(br.readLine());
+    
+    switch(pilih){
+//1 Transaksi Penjualan
+      case 1: 
+        String tanggal=tgl.getTanggal();
+        int customer=id();
+        int kembali=0;
+        
+        do{
+          do{
+        lagii=false;
+        System.out.println("Masukkan Kode : ");
+          cari = br.readLine();
+          hasil = cariKodeS(sepatu,cari);
+          if(hasil == -1){
+            System.out.println("                + HASIL CARI +               ");
+            System.out.println("=============================================");
+            System.out.println("KODE  " +cari +" Tidak Terdaftar !");
+            System.out.println();
+            break;
+          }
+          else{
+            System.out.println("                         + HASIL CARI +                           ");
+            System.out.println("==================================================================");
+            System.out.println("Kode\tNama Sepatu\t\tHarga@\t\tStock" );
+            System.out.println("==================================================================");
+            System.out.println(sepatu[hasil][0] +"\t" +sepatu[hasil][1] +"\t\t" +harga[hasil][0] +"\t\t" +harga[hasil][1]);
+            System.out.println();
+          System.out.println("Apakah anda yakin membelinya ?  ");
+          String jwb=br.readLine();
+          
+          
+          
+          if(jwb.equalsIgnoreCase("y")){                   
+          System.out.print("Masukkan Jumlah Barang Yang Dibeli : ");
+          jumlah = Integer.parseInt(br.readLine());
+          
+          if(jumlah>harga[hasil][1] || jumlah<1){
+            System.out.println("Stock terbatas, coba input lagi...");
+          }
+          else{
+          
+          //add to Vektor
+          vekSepatu.addElement(addSepatu(sepatu[hasil][0],sepatu[hasil][1]));
+          vekHarga.addElement(addHarga(harga[hasil][0],harga[hasil][1],(jumlah)));
+          vekIdtag.addElement(addIdtag(tanggal,Integer.toString(customer)));
+          
+          //kurangi Stock
+          int kurangStock=harga[hasil][1]-jumlah;
+          harga[hasil][1]=kurangStock;
+          total=harga[hasil][0]*jumlah;
+          semuaTotal=semuaTotal+total;
+            jterjual++;
+            terjual++;}
+          }
+         }
+     
+        }while(harga[hasil][1]<0);
+        System.out.print("Transaksi Lagi?[y/n]");
+        String jwb=br.readLine();
+        if (jwb.equalsIgnoreCase("y")){
+          lagii=true;   
+        }
+        
+    }while(lagii==true);
+    
+    vekCustomer.addElement(addCustomer(semuaTotal));
+    
+     if (terjual>0){
+    
+       
+    System.out.println();
+    System.out.println("________________________________________");
+    System.out.println("               VANS STORE               ");
+    System.out.println("_______ Pepelegi I Waru Sidoarjo _______");
+    System.out.println("Tanggal Transaksi : "+vekIdtag.elementAt(xx).elementAt(0));
+    System.out.println("Kode Penjualan    : "+vekIdtag.elementAt(xx).elementAt(1));
+    System.out.println("________________________________________");
+    for(int p=t;p<jterjual;p++){   
+    System.out.println( (p+1)+". " +vekSepatu.elementAt(p).elementAt(1)+"\t"+vekHarga.elementAt(p).elementAt(2)+"\t"+vekHarga.elementAt(p).elementAt(0));
+    }
+     System.out.println("________________________________________");
+     System.out.println("              TOTAL         Rp."+vekCustomer.elementAt(xx).elementAt(0));
+     do{
+     System.out.print("                TUNAI         Rp.");
+     int bayar=Integer.parseInt(br.readLine());
+     kembali=bayar-semuaTotal;
+     if(kembali<0){
+       System.out.println("Uang Tunai Yang Anda Bayar Tidak memenuhi..");
+     }
+     }while(kembali<0);
+     System.out.println("_________________________________________");
+     System.out.println("                KEMBALI       Rp."+kembali);
+     System.out.println("_____________  Terima Kasih _____________");
+     t=jterjual;
+     omsetJual(semuaTotal);
+     xx++;
+    }
+    
+    System.out.println();
+    break;
+
+//2 Maintenance      
+      case 2:
+        do{
+        System.out.println("===========================");
+        System.out.println("= MAINTENANCE Data Barang =");
+        System.out.println("===========================");
+        System.out.println("1.Meng-INSERT Data Baru");
+        System.out.println("2.Meng-UPDATE Data Baru");
+        System.out.println("3.Meng-DELETE Data Baru");
+        System.out.println("4.Kembali");
+        
+        System.out.print("Pilih : ");
+        pilih2 =Integer.parseInt(br.readLine());
+
+//2.1 INSERT................        
+       if(pilih2== 1){
+        System.out.println("========== INSERT DATA ===========");
+        
+        String [][]baruBarang=new String[sepatu.length][2];
+        int [][]baruHarga=new int[harga.length][2];
+        
+        System.arraycopy(sepatu,0,baruBarang,0,sepatu.length);
+        System.arraycopy(harga,0,baruHarga,0,harga.length);
+        sepatu=new String[sepatu.length+1][2];
+        harga=new int[harga.length+1][2];
+        System.arraycopy(baruBarang,0,sepatu,0,baruBarang.length);
+        System.arraycopy(baruHarga,0,harga,0,baruHarga.length);
+        
+        System.out.print("Masukan Kode Barang : ");
+        kode=br.readLine();
+        System.out.print("Masukan Nama Barang : ");
+        nama=br.readLine();
+        System.out.print("Masukan Harga Barang : ");
+        int harga1=Integer.parseInt(br.readLine());
+        System.out.print("Masukan Stock Barang : ");
+        int stock=Integer.parseInt(br.readLine());
+       
+        sepatu[sepatu.length-1][0]=kode;
+        sepatu[sepatu.length-1][1]=nama;
+        harga[harga.length-1][0]=harga1;
+        harga[harga.length-1][1]=stock;
+         
+          System.out.println();
+        }
+       
+//2.2 Update..............
+       if(pilih2==2){
+         System.out.println("========== UPDATE DATA ===========");
+            System.out.print("Masukkan Kode : ");
+            cari = br.readLine();
+            hasil = cariKodeS(sepatu,cari);
+            if(hasil == -1){
+              System.out.println("Kode " + cari + " Tidak Ditemukan !");
+            }
+            else{
+            System.out.println("                         + HASIL CARI +                           ");
+            System.out.println("==================================================================");
+            System.out.println("Kode\tNama Sepatu\t\tHarga@\t\tStock" );
+            System.out.println("==================================================================");
+            System.out.println(sepatu[hasil][0] +"\t" +sepatu[hasil][1] +"\t\t\t" +harga[hasil][0] +"\t\t" +harga[hasil][1] );
+              System.out.print("Apakah Anda Yakin Ingin Mengubah [y/t] : ");
+              pil = br.readLine();
+              if(pil.equalsIgnoreCase("y")){
+                System.out.print("Kode: ");
+                sepatu[hasil][0] = br.readLine();
+                System.out.print("Nama Sepatu : ");
+                sepatu[hasil][1] = br.readLine();
+                System.out.print("Harga : ");
+                harga[hasil][0] = Integer.parseInt(br.readLine());
+                System.out.print("Stock : ");
+                harga[hasil][1] = Integer.parseInt(br.readLine());
+              }
+          System.out.println(); 
+            }
+       }
+
+//2.3 Delete.................
+        if(pilih2==3){
+        System.out.println("========== DELETE DATA ===========");
+        String [][]baruBarang=new String[sepatu.length-1][2];
+        int [][]baruHarga=new int[harga.length-1][2];
+        System.out.print("Masukan Kode Barang : ");
+        cari=br.readLine();
+        hasil = cariKodeS(sepatu,cari);
+        idx=-1;
+          for (i=0;i<sepatu.length;i++)
+          {
+            if(sepatu[i][0].equalsIgnoreCase(cari))
+            {
+              idx=0;
+              System.out.println("                         + HASIL CARI +                           ");
+              System.out.println("==================================================================");
+              System.out.println("Kode\tNama Sepatu\t\tHarga@\t\tStock" );
+              System.out.println("==================================================================");
+              System.out.println(sepatu[hasil][0] +"\t" +sepatu[hasil][1] +"\t\t\t" +harga[hasil][0] +"\t\t" +harga[hasil][1] );
+              System.out.print("Apakah Anda Yakin Ingin Menghapusnya [y/t] : ");
+              pil=br.readLine();
+              if (pil.equalsIgnoreCase("y")){
+                System.arraycopy(sepatu,0,baruBarang,0,i);
+                System.arraycopy(harga,0,baruHarga,0,i);
+                System.arraycopy(sepatu,(i+1),baruBarang,i,(sepatu.length-i)-1);
+                System.arraycopy(harga,(i+1),baruHarga,i,(harga.length-i)-1);
+                
+                //[----------------------]
+                //[---------------*-------]
+  
+                //dipindah dari array lama ke array baru
+                 sepatu=new String[baruBarang.length][2];
+                 harga=new int[baruHarga.length][2];
+                 System.arraycopy(baruBarang,0,sepatu,0,baruBarang.length);
+                 System.arraycopy(baruHarga,0,harga,0,baruHarga.length);
+                System.out.println("Data Sudah Terhapus,Silahkan Cek........");
+              }
+            }
+          }
+          if (idx==-1)
+          {
+            System.out.println("Data Tidak Dapat Ditemukan!");
+          }
+         
+          System.out.println();
+        }
+      }while(pilih>=3);
+        break;
+      
+        
+      case 3:
+      System.out.println("------------------------------------------DATA TRANSAKSI PENJUALAN--------------------------------------------");
+      System.out.println("No.\tTanggal & Waktu\t\tKode Penjualan\tKode Barang\tNama Barang\tJumlah");
+      System.out.println("--------------------------------------------------------------------------------------------------------------");
+      for (int q=0;q<vekSepatu.size();q++)
+      {
+      System.out.println((q+1)+"." +"\t"+vekIdtag.elementAt(q).elementAt(0)+"\t"+vekIdtag.elementAt(q).elementAt(1) 
+       +"\t\t"+vekSepatu.elementAt(q).elementAt(0)+"\t\t"+vekSepatu.elementAt(q).elementAt(1)
+                           +"\t"+vekHarga.elementAt(q).elementAt(2));
+      }
+      System.out.println();  
+        break;
+        
+        
+//4 Menampilkan Data       
+      case 4:
+        int []hitungStock={0};
+        System.out.println("+=======================  D A T A      B A R A N G ======================+");
+        System.out.println("Kode\tNama Sepatu\t\tHarga@\t\tStock" );
+        System.out.println("==========================================================================");
+        for(int x=0;x<sepatu.length;x++){
+          System.out.println(sepatu[x][0] +"\t" +sepatu[x][1] +"\t\t" +harga[x][0] +"\t\t" +harga[x][1] );
+        hitungStock[0]=hitungStock[0]+harga[x][1]; //menghitung TOTAL Stock  
+      }
+        System.out.println("==========================================================================");
+        System.out.println(" \t\t\t\tTOTAL\t\t" +hitungStock[0]);
+        //xx++;
+        System.out.println();
+        break;
+        
+        
+//5 Mencari Data        
+      case 5: 
+          System.out.println("Masukkan Kode : ");
+          cari = br.readLine();
+          hasil = cariKodeS(sepatu,cari);
+          if(hasil == -1){
+            System.out.println("                + HASIL CARI +               ");
+            System.out.println("=============================================");
+            System.out.println("KODE  " +cari +" Tidak Terdaftar !");
+            System.out.println();
+          }
+          else{
+            System.out.println("                         + HASIL CARI +                           ");
+            System.out.println("==================================================================");
+            System.out.println("Kode\tNama Sepatu\t\tHarga@\t\tStock" );
+            System.out.println("==================================================================");
+            System.out.println(sepatu[hasil][0] +"\t" +sepatu[hasil][1] +"\t\t" +harga[hasil][0] +"\t\t" +harga[hasil][1] );
+            System.out.println();
+          }
+        break;
+      
+        
+//6 Omset        
+      case 6:
+        hasil=omsetJual(0);
+        System.out.println("Omset Barang saat ini : Rp." +hasil);
+        System.out.println();
+        break;
+        
+        
+//7 Exit        
+      case 7:
+        System.out.println("EXIT !!!");
+        System.exit(1);
+        break;
+        
+      default:
+        System.out.println("Inputan salah !!!! ");
+        System.out.println();
+        break;
+        
+    }
+    System.out.println();
+    
+  }while(true);
+  }
+  
+  else{
+  System.out.println("Anda Gagal Log In.. !!!");
+  System.exit(0);
+  }
+  
+  }
+}
