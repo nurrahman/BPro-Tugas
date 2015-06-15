@@ -1,0 +1,65 @@
+import java.io.*;
+public class bukuarray2d
+{
+  public static void main (String[]Nur)throws Exception
+  {
+  BufferedReader nur = new BufferedReader (new InputStreamReader (System.in));
+  //deklarasi variable
+  String pernyataan="";
+  String pernyataan1="";
+  String kode="";
+  String nama="";
+  String kodebk;
+  int jumlahbk=0;
+  int totbuku=0;
+  int i;
+  double diskon=0;
+  //deklarasi pernyataan array 2D yag dibutuhkan
+  String mhs [][]= new String [2][2];
+  int mhs1 [][]= new int [2][1];
+  
+  //type data string
+  mhs [0][0]="B001";
+  mhs [0][1]="Bahasa Pemrograman Java";
+  mhs [1][0]="B002";
+  mhs [1][1]="Desain Pemrograman WEB Dasar";
+  //type data numerik
+  mhs1 [0][0]=85000;
+  mhs1 [1][0]=80000;
+  
+  System.out.println("Masukkan Kode Buku : ");
+  kodebk=nur.readLine();
+  System.out.println("Jumlah Buku : ");
+  jumlahbk=Integer.parseInt(nur.readLine());
+  
+  for(i=0;i<2; i++)
+  {
+    
+    if(kodebk.equalsIgnoreCase(mhs[i][0]))
+    {
+      totbuku=jumlahbk*mhs1[i][0];
+      kode=mhs[i][0];
+      nama=mhs[i][1];
+     }
+    if (totbuku>500000)
+    {
+    diskon=totbuku*0.1;
+    pernyataan="Anda mendapatkan diskon";
+    }
+    else
+    {
+    pernyataan="Anda tidak mendapatkan diskon";
+    pernyataan1=pernyataan;
+    }
+  }
+  
+  
+  System.out.println("Kode Buku : " +kode);
+  System.out.println("Nama Buku : " +nama);
+  System.out.println("Total Harga yang dibeli : " +totbuku);
+  System.out.println("Anda mendapatkan diskon : " +diskon);
+  System.out.println("Total Diskon : " +(int)(totbuku-diskon));
+  System.out.println(pernyataan);
+  
+  }
+}
