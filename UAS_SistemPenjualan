@@ -12,7 +12,6 @@ public class UASproject{
   public static Vector<Vector> vekIdtag= new Vector<Vector>();
   public static int omset=0;
   
-  
   public static String sepatu [][]=
   {{"V01","Vans New Era"},
     {"V02","Vans Old School"},
@@ -33,7 +32,7 @@ public class UASproject{
     {"V17","Vans Rude Ude"},
     {"V18","Vans Portazoit"},
     {"V19","Vans Original"},
-    {"V20","Vans Boom"}};
+    {"V20","Vans Boom xxx"}};
   
   public static int harga[][] =
   { {800,50},
@@ -106,7 +105,7 @@ public class UASproject{
    }
   
     public static int omsetJual(int jumlah){
-    omset+=jumlah;
+    omset=omset+jumlah;
     return omset;
   }
    
@@ -128,6 +127,7 @@ public class UASproject{
   public static void main (String[]nur)throws IOException{
   BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
   
+  try{
   UASproject tgl = new UASproject();//harus sama dengan classnya UASproject
   int i=1;//untuk Login Ke
   boolean masuk=false;//untuk masuk ke username
@@ -187,7 +187,10 @@ public class UASproject{
         int kembali=0;
         
         do{
+          semuaTotal=0;
+          
           do{
+        jumlah=0;    
         lagii=false;
         System.out.println("Masukkan Kode : ");
           cari = br.readLine();
@@ -208,9 +211,7 @@ public class UASproject{
             System.out.println();
           System.out.println("Apakah anda yakin membelinya ?  ");
           String jwb=br.readLine();
-          
-          
-          
+         
           if(jwb.equalsIgnoreCase("y")){                   
           System.out.print("Masukkan Jumlah Barang Yang Dibeli : ");
           jumlah = Integer.parseInt(br.readLine());
@@ -219,7 +220,7 @@ public class UASproject{
             System.out.println("Stock terbatas, coba input lagi...");
           }
           else{
-          
+            
           //add to Vektor
           vekSepatu.addElement(addSepatu(sepatu[hasil][0],sepatu[hasil][1]));
           vekHarga.addElement(addHarga(harga[hasil][0],harga[hasil][1],(jumlah)));
@@ -228,39 +229,44 @@ public class UASproject{
           //kurangi Stock
           int kurangStock=harga[hasil][1]-jumlah;
           harga[hasil][1]=kurangStock;
-          total=harga[hasil][0]*jumlah;
-          semuaTotal=semuaTotal+total;
+          
             jterjual++;
             terjual++;}
           }
-         }
-     
+          
+          total=harga[hasil][0]*jumlah;
+          semuaTotal=semuaTotal+total;
+          break;
+          }
+         
         }while(harga[hasil][1]<0);
+        
         System.out.print("Transaksi Lagi?[y/n]");
         String jwb=br.readLine();
+        
         if (jwb.equalsIgnoreCase("y")){
-          lagii=true;   
+          lagii=true;
         }
+          
         
     }while(lagii==true);
     
     vekCustomer.addElement(addCustomer(semuaTotal));
     
-     if (terjual>0){
-    
+    if (terjual>0){
        
     System.out.println();
     System.out.println("________________________________________");
     System.out.println("               VANS STORE               ");
     System.out.println("_______ Pepelegi I Waru Sidoarjo _______");
-    System.out.println("Tanggal Transaksi : "+vekIdtag.elementAt(xx).elementAt(0));
-    System.out.println("Kode Penjualan    : "+vekIdtag.elementAt(xx).elementAt(1));
+    System.out.println("Tanggal Transaksi : "+tgl.getTanggal());
+    System.out.println("Kode Penjualan    : "+id());
     System.out.println("________________________________________");
     for(int p=t;p<jterjual;p++){   
     System.out.println( (p+1)+". " +vekSepatu.elementAt(p).elementAt(1)+"\t"+vekHarga.elementAt(p).elementAt(2)+"\t"+vekHarga.elementAt(p).elementAt(0));
     }
      System.out.println("________________________________________");
-     System.out.println("              TOTAL         Rp."+vekCustomer.elementAt(xx).elementAt(0));
+     System.out.println("              TOTAL         Rp."+semuaTotal);
      do{
      System.out.print("                TUNAI         Rp.");
      int bayar=Integer.parseInt(br.readLine());
@@ -300,7 +306,6 @@ public class UASproject{
         
         String [][]baruBarang=new String[sepatu.length][2];
         int [][]baruHarga=new int[harga.length][2];
-        
         System.arraycopy(sepatu,0,baruBarang,0,sepatu.length);
         System.arraycopy(harga,0,baruHarga,0,harga.length);
         sepatu=new String[sepatu.length+1][2];
@@ -310,18 +315,26 @@ public class UASproject{
         
         System.out.print("Masukan Kode Barang : ");
         kode=br.readLine();
+        
+        if(kode.equalsIgnoreCase(sepatu[hasil][0])){
+          System.out.println("Kode Barang Sudah ADA !!!");
+        break;
+        }
+        
+        else{
         System.out.print("Masukan Nama Barang : ");
         nama=br.readLine();
         System.out.print("Masukan Harga Barang : ");
         int harga1=Integer.parseInt(br.readLine());
         System.out.print("Masukan Stock Barang : ");
         int stock=Integer.parseInt(br.readLine());
-       
+        
         sepatu[sepatu.length-1][0]=kode;
         sepatu[sepatu.length-1][1]=nama;
         harga[harga.length-1][0]=harga1;
         harga[harga.length-1][1]=stock;
-         
+        }
+        
           System.out.println();
         }
        
@@ -407,14 +420,17 @@ public class UASproject{
       
         
       case 3:
+       int q=0;
+        xx=q;
       System.out.println("------------------------------------------DATA TRANSAKSI PENJUALAN--------------------------------------------");
       System.out.println("No.\tTanggal & Waktu\t\tKode Penjualan\tKode Barang\tNama Barang\tJumlah");
       System.out.println("--------------------------------------------------------------------------------------------------------------");
-      for (int q=0;q<vekSepatu.size();q++)
+      for (q=0;q<vekSepatu.size();q++)
       {
       System.out.println((q+1)+"." +"\t"+vekIdtag.elementAt(q).elementAt(0)+"\t"+vekIdtag.elementAt(q).elementAt(1) 
        +"\t\t"+vekSepatu.elementAt(q).elementAt(0)+"\t\t"+vekSepatu.elementAt(q).elementAt(1)
                            +"\t"+vekHarga.elementAt(q).elementAt(2));
+      
       }
       System.out.println();  
         break;
@@ -488,6 +504,8 @@ public class UASproject{
   System.out.println("Anda Gagal Log In.. !!!");
   System.exit(0);
   }
-  
+  }catch(Exception e){
+    System.out.println("Salah INPUT. Program Secara OTOMATIS Exit ..");
+  }
   }
 }
